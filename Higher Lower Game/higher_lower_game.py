@@ -42,21 +42,26 @@ def new_game():
     if (score > 0) and (tries == 0):
       print(f"\nYou're Right!! Current Score is {score}")
       
-    my_dict = game_data.data[random_choice]
+    my_dict_1 = game_data.data[random_choice]
   
-    print(f"Compare A: {my_dict['name']}, a {my_dict['description']}, from {my_dict['country']}.")
+    print(f"Compare A: {my_dict_1['name']}, a {my_dict_1['description']}, from {my_dict_1['country']}.")
   
-    follower_count_a = my_dict['follower_count']
+    follower_count_a = my_dict_1['follower_count']
     
     print(vs)
   
     random_choice = random.randint(0, game_entries)
   
-    my_dict = game_data.data[random_choice]
+    my_dict_2 = game_data.data[random_choice]
+
+    while (my_dict_1 == my_dict_2):
+      random_choice = random.randint(0, game_entries)
+      my_dict_2 = game_data.data[random_choice]
+
     
-    print(f"\nAgainst B: {my_dict['name']}, a {my_dict['description']}, from {my_dict['country']}.")
+    print(f"\nAgainst B: {my_dict_2['name']}, a {my_dict_2['description']}, from {my_dict_2['country']}.")
   
-    follower_count_b = my_dict['follower_count']
+    follower_count_b = my_dict_2['follower_count']
     
     choose = input("\nWho has more followers? Type 'A' or 'B': ")
     
