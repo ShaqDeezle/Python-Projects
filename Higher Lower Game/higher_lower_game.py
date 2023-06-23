@@ -1,4 +1,4 @@
-#!/
+#!/usr/bin/python3
 
 import random
 import game_data
