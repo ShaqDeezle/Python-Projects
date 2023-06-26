@@ -81,12 +81,10 @@ while (continue_dispense_coffee):
 
         elif (keys.lower() == "money"):
           money_spent = menu.resources["money"]
+
+          money_spent = f"{money_spent:.2f}"
           
-          if (len(str(money_spent)) == 3):
-            print(f"{keys.title()} spent: ${money_spent}0.")
-          
-          else:
-            print(f"{keys.title()} spent: ${money_spent}.")
+          print(f"{keys.title()} spent: ${money_spent}.")
           
         elif (keys.lower() == "milk"):
           remaining_milk = (menu.resources["milk"] - milk)
@@ -165,8 +163,10 @@ while (continue_dispense_coffee):
       if (remaining_coffee < 0) or (remaining_milk < 0) or (remaining_water < 0):
 
         drinks_you_want.pop()
-      
+
         total_drinks_bought = ", ".join(drinks_you_want)
+
+        number_of_drinks_bought -= 1
   
         print(f"\nThank You for purchasing your {total_drinks_bought.title()} with us today. Have a Great Day, and enjoy your coffee!")
   
@@ -184,14 +184,10 @@ while (continue_dispense_coffee):
         total = total.replace(",", "+")
   
         new_total = eval(total)
-  
-        rounded_new_total = round(new_total, 2)
-  
-        if (len(str(rounded_new_total)) == 3):
-          print(f"\nYou inserted {total} which is ${rounded_new_total}0.")
-        
-        else:
-          print(f"\nYou inserted {total} which is ${rounded_new_total}.")
+
+        rounded_new_total = f"{new_total:.2f}"
+
+        print(f"\nYou inserted {total} which is ${rounded_new_total}.")
   
         if (new_total == menu.MENU[type_of_coffee]["cost"]):
           
@@ -206,16 +202,13 @@ while (continue_dispense_coffee):
           
           difference_in_cost = (menu.MENU[type_of_coffee]["cost"] - new_total)
   
-          rounded_difference = round(difference_in_cost, 2)
+          rounded_difference = f"{difference_in_cost:.2f}"
           
-          if (len(str(rounded_difference)) == 3):
-            print(f"\nSorry that's not enough money. Money refunded. You're missing ${rounded_difference}0.")
-  
-          else:
-            
-            drinks_you_want.pop()
-            
-            print(f"\nSorry that's not enough money. Money refunded. You're missing ${rounded_difference}.")
+          drinks_you_want.pop()
+
+          number_of_drinks_bought -= 1
+          
+          print(f"\nSorry that's not enough money. Money refunded. You're missing ${rounded_difference}.")
   
           new_drink = input("\nWould you like another cup of coffee? 'Y' for yes, 'N' for no.\n").upper()
           
@@ -225,15 +218,11 @@ while (continue_dispense_coffee):
         elif (new_total > menu.MENU[type_of_coffee]["cost"]):
           
           difference_in_cost = (new_total - menu.MENU[type_of_coffee]["cost"])
+
+          rounded_difference = f"{difference_in_cost:.2f}"
           
-          rounded_difference = round(difference_in_cost, 2)
-          
-          if (len(str(rounded_difference)) == 3):
-            print(f"\nYou overpaid, here's your change: ${rounded_difference}0.")
-  
-          else:
-            print(f"\nYou overpaid, here's your change: ${rounded_difference}.")
-  
+          print(f"\nYou overpaid, here's your change: ${rounded_difference}.")
+            
           new_drink = input("\nWould you like another cup of coffee? 'Y' for yes, 'N' for no.\n").upper()
       
           if (new_drink == "N"):
